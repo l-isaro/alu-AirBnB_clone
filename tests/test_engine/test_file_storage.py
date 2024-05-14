@@ -34,16 +34,12 @@ class TestFileStorage(unittest.TestCase):
             self.assertIn("City.{}".format(obj.id), data)
 
     def test_reload(self):  
-        try:
-            with open(self.__file_path, 'r') as file:
-                obj_dict = json.load(file)
-
-                for key, value in obj_dict.items():
-                    self.__objects[key] = eval(
-                        f"{value['__class__']}(**{value})")
-
-        except FileNotFoundError:
-            pass
+        obj = City()
+        models.storage.new(obj)
+        models.storage.save()
+        models.storage.reload()     
+        objs = models.storage.all()
+        self.assertIn("City.{}".format(obj.id), objs)
 
 if __name__ == '__main__':
     unittest.main()    
