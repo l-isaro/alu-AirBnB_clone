@@ -1,4 +1,5 @@
 # alu-AirBnB_clone
+
 Project Description
 
 Here, We'll be cloning the console part of the AirBnB clone Project.
@@ -16,14 +17,10 @@ Our command interpreter would be able to:
 
 - Create a new object(ex: a new User or a new Place)
 
-
 - Retrieve an object from a file, a database etc...
-
 
 - Do operations on objects(count, compute stats, etc...)
 
-
 - Update attributes of an object
 
-
-- Destroy an object 
+- Destroy an object
