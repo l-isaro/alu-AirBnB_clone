@@ -1,45 +1,39 @@
 #!/usr/bin/python3
 """test for the FileStorage class"""
 
-import os
-import json
-import models
 import unittest
-from datetime import datetime
 from models.base_model import BaseModel
 from models.engine.file_storage import FileStorage
-from models.user import User
-from models.state import State
-from models.place import Place
-from models.city import City
-from models.amenity import Amenity
-from models.review import Review
 
 
-class TestFileStorage(unittest.TestCase): 
+class TestFileStorage(unittest.TestCase):
+    """Test cases for FileStorage class"""
+    def setUp(self):
+        """Set up for test"""
+        self.file_storage = FileStorage()
+
     def test_all(self):
-        self.assertIsInstance(models.storage.all(), dict)
-        
+        """Test all() method"""
+        objects = self.file_storage.all()
+        self.assertIsInstance(objects, dict)
+        self.assertIs(objects, self.file_storage._FileStorage__objects)
+
     def test_new(self):
-        obj = State()
-        all_objects = models.storage.all()
-        self.assertIn("State.{}".format(obj.id), all_objects)
+        """Test new() method"""
+        obj = BaseModel()
+        key = "{}.{}".format(obj.__class__.__name__, obj.id)
+        self.file_storage.new(obj)
+        self.assertIn(key, self.file_storage.all())
 
-    def test_save(self):
-        obj = City()
-        models.storage.new(obj)
-        models.storage.save()
-        with open('file.json', 'r') as file:
-            data = json.load(file)
-            self.assertIn("City.{}".format(obj.id), data)
-
-    def test_reload(self):  
-        obj = City()
-        models.storage.new(obj)
-        models.storage.save()
-        models.storage.reload()     
-        objs = models.storage.all()
-        self.assertIn("City.{}".format(obj.id), objs)
+    def test_save_reload(self):
+        """Test save() and reload() methods"""
+        obj = BaseModel()
+        key = "{}.{}".format(obj.__class__.__name__, obj.id)
+        self.file_storage.new(obj)
+        self.file_storage.save()
+        new_storage = FileStorage()
+        new_storage.reload()
+        self.assertIn(key, new_storage.all())
 
 if __name__ == '__main__':
-    unittest.main()    
+    unittest.main()
