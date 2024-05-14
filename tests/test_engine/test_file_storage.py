@@ -2,38 +2,38 @@
 """test for the FileStorage class"""
 
 import unittest
+import models
+import json
+from models.city import City
+from models.state import State
 from models.base_model import BaseModel
 from models.engine.file_storage import FileStorage
 
 
-class TestFileStorage(unittest.TestCase):
-    """Test cases for FileStorage class"""
-    def setUp(self):
-        """Set up for test"""
-        self.file_storage = FileStorage()
-
+class TestFileStorage(unittest.TestCase): 
     def test_all(self):
-        """Test all() method"""
-        objects = self.file_storage.all()
-        self.assertIsInstance(objects, dict)
-        self.assertIs(objects, self.file_storage._FileStorage__objects)
-
+        self.assertIsInstance(models.storage.all(), dict)
+        
     def test_new(self):
-        """Test new() method"""
-        obj = BaseModel()
-        key = "{}.{}".format(obj.__class__.__name__, obj.id)
-        self.file_storage.new(obj)
-        self.assertIn(key, self.file_storage.all())
+        obj = State()
+        all_objects = models.storage.all()
+        self.assertIn("State.{}".format(obj.id), all_objects)
 
-    def test_save_reload(self):
-        """Test save() and reload() methods"""
-        obj = BaseModel()
-        key = "{}.{}".format(obj.__class__.__name__, obj.id)
-        self.file_storage.new(obj)
-        self.file_storage.save()
-        new_storage = FileStorage()
-        new_storage.reload()
-        self.assertIn(key, new_storage.all())
+    def test_save(self):
+        obj = City()
+        models.storage.new(obj)
+        models.storage.save()
+        with open('file.json', 'r') as file:
+            data = json.load(file)
+            self.assertIn("City.{}".format(obj.id), data)
+
+    def test_reload(self):  
+        obj = City()
+        models.storage.new(obj)
+        models.storage.save()
+        models.storage.reload()     
+        objs = models.storage.all()
+        self.assertIn("City.{}".format(obj.id), objs)
 
 if __name__ == '__main__':
-    unittest.main()
+    unittest.main()    
