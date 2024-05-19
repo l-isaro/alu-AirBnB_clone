@@ -1,6 +1,10 @@
 #!/usr/bin/python3
-"""
-Module defines unittests for models/user.py.
+"""Defines unittests for models/user.py.
+
+Unittest classes:
+    TestUser_instantiation
+    TestUser_save
+    TestUser_to_dict
 """
 import os
 import models

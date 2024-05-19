@@ -1,8 +1,13 @@
 #!/usr/bin/python3
-"""comment"""
+"""Defines the Amenity class."""
 from models.base_model import BaseModel
 
-
+# Amenity inherits from BaseModel
 class Amenity(BaseModel):
-    """amenity class"""
+    """Represent an amenity.
+
+    Attributes:
+        name (str): The name of the amenity.
+    """
+
     name = ""
