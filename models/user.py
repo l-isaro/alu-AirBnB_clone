@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-"""Importation"""
+"""documentation"""
 from models.base_model import BaseModel
 
 
