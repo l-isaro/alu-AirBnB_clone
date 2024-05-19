@@ -14,6 +14,7 @@ from models.review import Review
 
 # This is a regular expression that matches the syntax of a command
 
+
 def parse(arg):
     curly_braces = re.search(r"\{(.*?)\}", arg)
     brackets = re.search(r"\[(.*?)\]", arg)
