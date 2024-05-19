@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 """test file for city class"""
 
+
 import unittest
 from models.city import City
 

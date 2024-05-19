@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 """test file for amenity class"""
 
+
 import unittest
 from models.amenity import Amenity
 

@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 """test file for place class"""
 
+
 import unittest
 from models.place import Place
 
@@ -76,7 +77,9 @@ class TestUserModel(unittest.TestCase):
     def test_amenity_ids(self):
         self.assertIsInstance(self.place_model.amenity_ids, list)
         self.assertEqual(self.place_model.amenity_ids, [])
+
         self.place_model.amenity_ids = ["1", "2", "3"]
+        
         self.assertEqual(self.place_model.amenity_ids, ["1","2","3"])
 
 if __name__ == "__main__":
