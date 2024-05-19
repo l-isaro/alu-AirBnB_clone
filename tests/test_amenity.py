@@ -11,13 +11,13 @@ class TestUserModel(unittest.TestCase):
         self.amenity_model = Amenity()
 
     def test_instance(self):
-        self.assertIsInstance(self.amenity_model, Amenity)    
+        self.assertIsInstance(self.amenity_model, Amenity)
 
-    def test_name(self): 
+    def test_name(self):
         self.assertIsInstance(self.amenity_model.name, str)
         self.assertEqual(self.amenity_model.name, "")
-        self.amenity_model.name = "KMJ"   
+        self.amenity_model.name = "KMJ"
         self.assertEqual(self.amenity_model.name, "KMJ")
-    
+
 if __name__ == "__main__":
     unittest.main()
