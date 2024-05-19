@@ -20,8 +20,20 @@ class FileStorage:
     """
 
     def __init__(self):
-        self._file_path = "file.json"  # Changed to _file_path
+        self.__file_path = "file.json"  # Private variable
         self.__objects = {}
+
+    # Public method to access the private variable
+    def get_file_path(self):
+        """
+        Returns the file path where the objects are stored.
+
+        Returns:
+            str: The file path.
+        """
+        return self.__file_path
+
+    # Other methods remain unchanged...
 
     @property
     def file_path(self):
