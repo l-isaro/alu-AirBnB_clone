@@ -26,7 +26,6 @@ class TestUserModel(unittest.TestCase):
         self.assertIsInstance(self.review_model.place_id, str)
         self.assertEqual(self.review_model.place_id, "")
         self.review_model.place_id = "5678"   
-        self.assertEqual(self.review_model.place_id, "5678")    
-            
+        self.assertEqual(self.review_model.place_id, "5678")             
 if __name__ == "__main__":
     unittest.main()
