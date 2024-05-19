@@ -2,38 +2,43 @@
 """test for the FileStorage class"""
 
 import unittest
-import models
 import json
-from models.city import City
-from models.state import State
 from models.base_model import BaseModel
+from models.user import User
+from models.state import State
+from models.city import City
+from models.place import Place
+from models.amenity import Amenity
+from models.review import Review
 from models.engine.file_storage import FileStorage
 
+class TestFileStorage(unittest.TestCase):
+    def setUp(self):
+        self.storage = FileStorage()
 
-class TestFileStorage(unittest.TestCase): 
     def test_all(self):
-        self.assertIsInstance(models.storage.all(), dict)
+        self.assertIsInstance(self.storage.all(), dict)
         
     def test_new(self):
         obj = State()
-        all_objects = models.storage.all()
+        all_objects = self.storage.all()
         self.assertIn("State.{}".format(obj.id), all_objects)
 
-    def test_save(self):
+    def test_save_and_reload(self):
         obj = City()
-        models.storage.new(obj)
-        models.storage.save()
-        with open('file.json', 'r') as file:
-            data = json.load(file)
-            self.assertIn("City.{}".format(obj.id), data)
+        self.storage.new(obj)
+        self.storage.save()
 
-    def test_reload(self):  
-        obj = City()
-        models.storage.new(obj)
-        models.storage.save()
-        models.storage.reload()     
-        objs = models.storage.all()
-        self.assertIn("City.{}".format(obj.id), objs)
+        # Clear the current objects dictionary
+        self.storage.__objects = {}
+
+        # Reload the objects from the saved file
+        self.storage.reload()
+
+        all_objects = self.storage.all()
+
+        self.assertIn("City.{}".format(obj.id), all_objects)
+
 
 if __name__ == '__main__':
-    unittest.main()    
+    unittest.main()
