@@ -19,8 +19,19 @@ class FileStorage:
     A file storage system for storing and retrieving objects.
     """
 
-    __file_path = "file.json"
-    __objects = {}
+    def __init__(self):
+        self._file_path = "file.json"  # Changed to _file_path
+        self.__objects = {}
+
+    @property
+    def file_path(self):
+        """
+        Getter for the file path.
+        
+        Returns:
+            str: The file path where the objects are stored.
+        """
+        return self._file_path
 
     def all(self):
         """
@@ -50,7 +61,7 @@ class FileStorage:
             obj_dict[key] = value.to_dict()
 
         try:
-            with open(self.__file_path, 'w') as file:
+            with open(self.file_path, 'w') as file:  # Use the getter here
                 json.dump(obj_dict, file, indent=2)
         except FileNotFoundError:
             pass
@@ -60,7 +71,7 @@ class FileStorage:
         Reloads the objects from the JSON file into the storage.
         """
         try:
-            with open(FileStorage.__file_path, 'r') as file:
+            with open(self.file_path, 'r') as file:  # And here
                 obj_dict = json.load(file)
 
                 for key, value in obj_dict.items():
