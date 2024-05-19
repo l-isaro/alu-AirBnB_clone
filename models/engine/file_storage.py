@@ -11,6 +11,7 @@ from models.review import Review
 
 # FileStorage inherits from BaseModel
 
+
 class FileStorage:
     """Represent an abstracted storage engine.
 
