@@ -1,0 +1,17 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: Circular, "Helvetica Neue", Helvetica, Arial, sans-serif;
+  padding-top: 70px;
+}
+
+.container {
+  max-width: 1000px;
+  margin-block: 30px;
+  margin-inline: auto;
+}
